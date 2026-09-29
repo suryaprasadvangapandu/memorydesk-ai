@@ -278,40 +278,22 @@ Open in browser:
 
 ---
 
-## 🎙️ 60-Second Hackathon Presentation Pitch
+## 🎭 Live Demonstration Walkthrough
 
-1. **The Hook (0:00 - 0:15):**  
-   *"Judges, traditional AI support chatbots have severe amnesia. Every time a developer opens a ticket, they have to repeat their OS, their Python version, and what troubleshooting steps failed last week."*
-2. **The Solution (0:15 - 0:30):**  
-   *"We built **MemoryDesk AI** powered by **Hindsight persistent memory**. Across every session, our agent isolates customer memory banks, learns key facts, and recalls them before generating a response."*
-3. **The First Interaction (0:30 - 0:45):**  
-   *(Show Dashboard)* *"In our first conversation, Rahul mentions: 'My name is Rahul. I use Windows 11 and Python 3.12. I am getting a Django database error.' The agent solves it, and Hindsight's `retain()` engine stores his OS, Python version, and the PostgreSQL port 5432 resolution."*
-4. **The Proof (0:45 - 1:00):**  
-   *(Click '2. The Recall Test')* *"Days later in a new session, Rahul simply asks: 'The same database problem happened again.' Notice the agent's response: It doesn't ask for his OS or error code. It says: 'Hello Rahul! I remember you are on Windows 11 Pro with Python 3.12, and previously resolved a PostgreSQL port 5432 connection issue.' And it generates an automated PowerShell fix script with a copy button!"*
-5. **The Advanced Inspector (1:00 - 1:15):**  
-   *"Look at our right panel: **What MemoryDesk Remembers** with our Biomimetic 3-Tier memory filters and our **🔮 Hindsight Reflection** button synthesizing mental models. With Hindsight, support teams eliminate 40% of repetitive questions. Thank you!"*
+You can test and demonstrate MemoryDesk AI in 3 simple steps:
 
----
+1. **Step 1 — Initial Environment Setup:**  
+   Customer introduces their setup: *"My name is Rahul. I use Windows 11 and Python 3.12. I am getting a Django database connection error."*  
+   $\rightarrow$ Agent assists and Hindsight **retains** their OS, stack, and incident notes into their isolated bank.
+2. **Step 2 — The Recall Test (The Proof):**  
+   Days later, the customer opens a new session and simply types: *"The same database problem happened again."*  
+   $\rightarrow$ Agent **recalls** prior memories, references Windows 11 & Python 3.12, reminds them of the PostgreSQL port 5432 configuration, and generates an OS-specific PowerShell script!
+3. **Step 3 — Inspect Memory Banks & Reflection:**  
+   Open the right-hand **"What MemoryDesk Remembers"** panel to view the live Structured Profile, Biomimetic 3-Tier Memory Bank, and click **`🔮 Hindsight Reflection`** to view synthesized mental models.
 
-## 🚀 How to Push to GitHub Right Now
-
-Follow these exact commands to push the complete codebase to your GitHub repository:
-
-```powershell
-# 1. Check git status to ensure working directory is clean
-git status
-
-# 2. Add your GitHub repository as remote origin (replace with your repo URL)
-git remote add origin https://github.com/<your-username>/<your-repo-name>.git
-
-# 3. Ensure branch is main
-git branch -M main
-
-# 4. Push all code to GitHub
-git push -u origin main
-```
-
-*(Your `.env` and virtual environment are already protected in `.gitignore` and will never be committed).*
+> 🎙️ **Hackathon Presentation Guide:**  
+> For the complete spoken judging script with timed cues, see [DEMO_SCRIPT.md](file:///c:/Users/HP/Downloads/hackathon/DEMO_SCRIPT.md).  
+> For the in-depth system architecture specification, see [ARCHITECTURE.md](file:///c:/Users/HP/Downloads/hackathon/ARCHITECTURE.md).
 
 ---
 
@@ -319,3 +301,4 @@ git push -u origin main
 
 Developed with ❤️ for **HackwithHyderabad 3.0**.  
 Powered by [Hindsight](https://github.com/vectorize-io/hindsight) by Vectorize.io.
+
