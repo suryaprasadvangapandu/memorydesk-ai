@@ -77,6 +77,125 @@
       "content": "Hello Rahul! I remember from our previous interactions that you are running Windows 11 Pro with Python 3.12, Django 5.0, PostgreSQL 16 and previously encountered Django database connection timeout on port 5432.\n\nSince you prefer step-by-step troubleshooting, let's pick up right where we left off:\n1. Let's verify if PostgreSQL service on port 5432 is still actively listening:\n   `Get-Service postgresql*` (or check Services.msc on Windows 11 Pro)\n2. Confirm your connection settings in `settings.py`:\n   `python manage.py dbshell`\n\nDid the connection drop after a network adapter reboot or Windows update again?",
       "timestamp": "2026-09-29T14:10:06.850227",
       "memories_used": 5
+    },
+    {
+      "id": "msg_051b312b",
+      "role": "user",
+      "content": "hi",
+      "timestamp": "2026-09-29T14:17:33.860699"
+    },
+    {
+      "id": "msg_407b8478",
+      "role": "assistant",
+      "content": "Welcome back, Rahul! Great to see you again. I recall you're working on Python 3.12, Django 5.0, PostgreSQL 16 on Windows 11 Pro. How can I help you today?",
+      "timestamp": "2026-09-29T14:17:33.860699",
+      "memories_used": 5
+    },
+    {
+      "id": "msg_a880de56",
+      "role": "user",
+      "content": "good job",
+      "timestamp": "2026-09-29T14:17:44.835417"
+    },
+    {
+      "id": "msg_60adbca1",
+      "role": "assistant",
+      "content": "Thanks for reaching out, Rahul. Taking into account your Windows 11 Pro environment and Python 3.12, Django 5.0, PostgreSQL 16, I'm analyzing your request: \"good job\".\n\nLet's troubleshoot this methodically based on your preferences. Could you share the latest terminal output or error code?",
+      "timestamp": "2026-09-29T14:17:44.835417",
+      "memories_used": 5
+    },
+    {
+      "id": "msg_83d79c64",
+      "role": "user",
+      "content": "what is your namw",
+      "timestamp": "2026-09-29T14:17:59.281269"
+    },
+    {
+      "id": "msg_df94ded1",
+      "role": "assistant",
+      "content": "Thanks for reaching out, Rahul. Taking into account your Windows 11 Pro environment and Python 3.12, Django 5.0, PostgreSQL 16, I'm analyzing your request: \"what is your namw\".\n\nLet's troubleshoot this methodically based on your preferences. Could you share the latest terminal output or error code?",
+      "timestamp": "2026-09-29T14:17:59.281269",
+      "memories_used": 5
+    },
+    {
+      "id": "msg_673ff095",
+      "role": "user",
+      "content": "The same database problem happened again.",
+      "timestamp": "2026-09-29T14:19:21.916412"
+    },
+    {
+      "id": "msg_031adb29",
+      "role": "assistant",
+      "content": "Hello Rahul! I remember from our previous interactions that you are running Windows 11 Pro with Python 3.12, Django 5.0, PostgreSQL 16 and previously encountered Django database connection timeout on port 5432.\n\nSince you prefer step-by-step troubleshooting, let's pick up right where we left off:\n1. Let's verify if PostgreSQL service on port 5432 is still actively listening:\n   `Get-Service postgresql*` (or check Services.msc on Windows 11 Pro)\n2. Confirm your connection settings in `settings.py`:\n   `python manage.py dbshell`\n\nDid the connection drop after a network adapter reboot or Windows update again?",
+      "timestamp": "2026-09-29T14:19:21.916412",
+      "memories_used": 5
+    },
+    {
+      "id": "msg_1bc75f05",
+      "role": "user",
+      "content": "The same database problem happened again.",
+      "timestamp": "2026-09-29T14:41:43.762492"
+    },
+    {
+      "id": "msg_488395f1",
+      "role": "assistant",
+      "content": "Hello Rahul! I remember from our previous interactions that you are running Windows 11 Pro with Python 3.12, Django 5.0, PostgreSQL 16 and previously encountered Django database connection timeout on port 5432.\n\nSince you prefer step-by-step troubleshooting, let's pick up right where we left off:\n1. Let's verify if PostgreSQL service on port 5432 is still actively listening:\n   `Get-Service postgresql*` (or check Services.msc on Windows 11 Pro)\n2. Confirm your connection settings in `settings.py`:\n   `python manage.py dbshell`\n\nDid the connection drop after a network adapter reboot or Windows update again?",
+      "timestamp": "2026-09-29T14:41:43.762492",
+      "memories_used": 5
+    }
+  ],
+  "cust_68652a": [
+    {
+      "id": "msg_2a49d5b1",
+      "role": "user",
+      "content": "hi",
+      "timestamp": "2026-09-29T14:23:20.044167"
+    },
+    {
+      "id": "msg_d17f3f08",
+      "role": "assistant",
+      "content": "Welcome back, surya! Great to see you again. I recall you're working on django,sql on ubuntu. How can I help you today?",
+      "timestamp": "2026-09-29T14:23:20.044167",
+      "memories_used": 3
+    },
+    {
+      "id": "msg_0707acf9",
+      "role": "user",
+      "content": "My name is Rahul. I use Windows 11 and Python 3.12. I am getting a Django database connection error.",
+      "timestamp": "2026-09-29T14:23:41.920996"
+    },
+    {
+      "id": "msg_a804a816",
+      "role": "assistant",
+      "content": "Hello surya! I remember from our previous interactions that you are running ubuntu with django,sql and previously encountered None.\n\nSince you prefer step-by-step troubleshooting, let's pick up right where we left off:\n1. Let's verify if PostgreSQL service on port 5432 is still actively listening:\n   `Get-Service postgresql*` (or check Services.msc on ubuntu)\n2. Confirm your connection settings in `settings.py`:\n   `python manage.py dbshell`\n\nDid the connection drop after a network adapter reboot or Windows update again?",
+      "timestamp": "2026-09-29T14:23:41.920996",
+      "memories_used": 3
+    },
+    {
+      "id": "msg_57e5c68b",
+      "role": "user",
+      "content": "The same database problem happened again.",
+      "timestamp": "2026-09-29T14:23:52.882141"
+    },
+    {
+      "id": "msg_6c28f61d",
+      "role": "assistant",
+      "content": "Hello surya! I remember from our previous interactions that you are running ubuntu with django,sql and previously encountered None.\n\nSince you prefer step-by-step troubleshooting, let's pick up right where we left off:\n1. Let's verify if PostgreSQL service on port 5432 is still actively listening:\n   `Get-Service postgresql*` (or check Services.msc on ubuntu)\n2. Confirm your connection settings in `settings.py`:\n   `python manage.py dbshell`\n\nDid the connection drop after a network adapter reboot or Windows update again?",
+      "timestamp": "2026-09-29T14:23:52.882141",
+      "memories_used": 4
+    },
+    {
+      "id": "msg_3521cecc",
+      "role": "user",
+      "content": "What environment and preferences do you remember about me?",
+      "timestamp": "2026-09-29T14:24:04.391314"
+    },
+    {
+      "id": "msg_367e402c",
+      "role": "assistant",
+      "content": "Here is what I have retained in my Hindsight persistent memory about you, surya:\n\n- Support preference: shell.\n- Customer is surya, Developer at infosys.\n- Operating system is ubuntu with development stack django,sql.\n- Customer reported operating environment: My name is Rahul. I use Windows 11 and Python 3.12. I am getting a Django database connection error.\n- Customer referenced recurring issue: 'The same database problem happened again.' - agent provided targeted troubleshooting steps.\n\nYour stack is django,sql on ubuntu. How can I assist you with your project today?",
+      "timestamp": "2026-09-29T14:24:04.391314",
+      "memories_used": 5
     }
   ]
 }

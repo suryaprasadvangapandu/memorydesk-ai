@@ -97,6 +97,7 @@ async function refreshCurrentMemory() {
     const res = await fetch(`${API_BASE}/api/customers/${customerId}/memory`);
     if (!res.ok) return;
     const data = await res.json();
+    window.AppState.currentMemoryData = data;
 
     // 1. Structured Entity Profile
     const prof = data.structured_profile;
@@ -112,31 +113,72 @@ async function refreshCurrentMemory() {
     if (profIssue) profIssue.innerText = prof.previous_issue || window.AppState.currentCustomer.last_issue || "None recorded yet";
     if (profPref) profPref.innerText = prof.preference || window.AppState.currentCustomer.preference;
 
-    // 2. Timeline
-    const totalCountEl = document.getElementById("memory-total-count");
-    if (totalCountEl) totalCountEl.innerText = `${data.total_memories} units retained`;
+    // 2. Timeline with active filter
+    renderFilteredTimeline(window.AppState.activeMemoryFilter || 'all');
 
-    const timelineContainer = document.getElementById("timeline-list");
-    if (timelineContainer) {
-      timelineContainer.innerHTML = "";
-      if (data.timeline && data.timeline.length > 0) {
-        data.timeline.forEach(step => {
-          const stepEl = document.createElement("div");
-          stepEl.className = "timeline-step";
-          stepEl.innerHTML = `
-            <div class="timeline-badge">${step.label}</div>
-            <div class="timeline-text">${step.summary}</div>
-          `;
-          timelineContainer.appendChild(stepEl);
-        });
-      } else {
-        timelineContainer.innerHTML = `<div style="font-size: 0.8rem; color: #94a3b8; padding: 0.5rem 0;">No memories recorded yet in this bank.</div>`;
-      }
-    }
   } catch (err) {
     console.error("Error refreshing memory:", err);
   }
 }
+
+function filterMemoryView(category) {
+  window.AppState.activeMemoryFilter = category;
+  
+  // Update button active state
+  document.querySelectorAll(".filter-tab").forEach(tab => tab.classList.remove("active"));
+  const tabMap = {
+    'all': 'tab-all',
+    'world_fact': 'tab-world',
+    'experience': 'tab-exp',
+    'observation': 'tab-obs'
+  };
+  const activeTab = document.getElementById(tabMap[category]);
+  if (activeTab) activeTab.classList.add("active");
+
+  renderFilteredTimeline(category);
+}
+
+function renderFilteredTimeline(category) {
+  const data = window.AppState.currentMemoryData;
+  if (!data) return;
+
+  const totalCountEl = document.getElementById("memory-total-count");
+  const timelineContainer = document.getElementById("timeline-list");
+  if (!timelineContainer) return;
+
+  let itemsToRender = [];
+  if (category === 'all') {
+    itemsToRender = data.memories || [];
+  } else if (data.categorized_memories && data.categorized_memories[category + 's']) {
+    itemsToRender = data.categorized_memories[category + 's'];
+  } else {
+    itemsToRender = (data.memories || []).filter(m => m.type === category);
+  }
+
+  if (totalCountEl) totalCountEl.innerText = `${itemsToRender.length} of ${data.total_memories} units`;
+
+  timelineContainer.innerHTML = "";
+  if (itemsToRender.length > 0) {
+    itemsToRender.forEach((m, idx) => {
+      const stepEl = document.createElement("div");
+      stepEl.className = "timeline-step";
+      
+      let badgeLabel = "Memory Unit";
+      if (m.type === "world_fact") badgeLabel = "🌍 World Fact";
+      else if (m.type === "experience") badgeLabel = "📜 Experience";
+      else if (m.type === "observation") badgeLabel = "💡 Observation";
+
+      stepEl.innerHTML = `
+        <div class="timeline-badge">${badgeLabel} #${idx + 1}</div>
+        <div class="timeline-text">${m.text}</div>
+      `;
+      timelineContainer.appendChild(stepEl);
+    });
+  } else {
+    timelineContainer.innerHTML = `<div style="font-size: 0.8rem; color: #94a3b8; padding: 0.5rem 0;">No ${category.replace('_', ' ')} memories recorded in this bank.</div>`;
+  }
+}
+
 
 // Search Memory Bank
 async function executeMemorySearch() {
@@ -296,7 +338,113 @@ async function runFullDemoStory() {
   showToast("Demonstration complete: Notice persistent recall in response!", "success");
 }
 
+// -------------------------------------------------------------
+// Advanced Features: Hindsight Reflection & Tenant Isolation
+// -------------------------------------------------------------
+async function openReflectionModal() {
+  if (!window.AppState.currentCustomer) return;
+  const customerId = window.AppState.currentCustomer.id;
+
+  openModal("modal-reflection");
+  const loading = document.getElementById("reflection-loading");
+  const content = document.getElementById("reflection-content");
+  if (loading) loading.style.display = "block";
+  if (content) content.style.display = "none";
+
+  try {
+    const res = await fetch(`${API_BASE}/api/customers/${customerId}/reflect`, { method: "POST" });
+    if (!res.ok) throw new Error("Reflection failed");
+    const data = await res.json();
+
+    const modelEl = document.getElementById("reflection-mental-model");
+    const patternEl = document.getElementById("reflection-recurring-pattern");
+    const adviceEl = document.getElementById("reflection-proactive-advice");
+    const scoreBadge = document.getElementById("disposition-score-badge");
+    const barEl = document.getElementById("disposition-bar");
+    const countEl = document.getElementById("facts-analyzed-count");
+
+    if (modelEl) modelEl.innerText = data.mental_model;
+    if (patternEl) patternEl.innerText = data.recurring_pattern;
+    if (adviceEl) adviceEl.innerText = data.proactive_recommendation;
+
+    const scorePct = Math.round((data.disposition_score || 0.85) * 100);
+    if (scoreBadge) scoreBadge.innerText = `${scorePct}% Disposition Stability`;
+    if (barEl) barEl.style.width = `${scorePct}%`;
+    if (countEl) countEl.innerText = `Synthesized across ${data.facts_analyzed || 8} persistent memory units`;
+
+  } catch (err) {
+    console.error("Reflection error:", err);
+    showToast("Error executing Hindsight reflection", "error");
+  } finally {
+    if (loading) loading.style.display = "none";
+    if (content) content.style.display = "flex";
+  }
+}
+
+function openIsolationModal() {
+  openModal("modal-isolation");
+  runIsolationTest();
+}
+
+async function runIsolationTest() {
+  const queryInput = document.getElementById("isolation-query-input");
+  const grid = document.getElementById("isolation-results-grid");
+  const verdictBox = document.getElementById("isolation-verdict-box");
+  const verdictText = document.getElementById("isolation-verdict-text");
+  if (!grid) return;
+
+  const query = queryInput ? queryInput.value.trim() : "database connection issue";
+  grid.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; color: #64748b; padding: 1rem;">Executing cross-bank isolation query...</div>`;
+
+  try {
+    const res = await fetch(`${API_BASE}/api/memory/isolation-test`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query: query, customer_ids: ["cust_rahul", "cust_priya", "cust_arjun"] })
+    });
+    if (!res.ok) throw new Error("Isolation test failed");
+    const data = await res.json();
+
+    grid.innerHTML = "";
+    const customerNames = {
+      "cust_rahul": "Rahul Sharma (Win 11)",
+      "cust_priya": "Priya Reddy (macOS M3)",
+      "cust_arjun": "Arjun Kumar (Ubuntu)"
+    };
+
+    for (const [cid, info] of Object.entries(data.results_by_customer)) {
+      const col = document.createElement("div");
+      col.style.background = "#ffffff";
+      col.style.border = "1px solid var(--border)";
+      col.style.borderRadius = "8px";
+      col.style.padding = "0.85rem";
+      col.style.fontSize = "0.8rem";
+
+      const recalledItems = info.recalled_texts.length > 0
+        ? info.recalled_texts.map(t => `<div style="margin-top: 0.35rem; padding: 0.35rem 0.5rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px; font-size: 0.75rem;">${t}</div>`).join("")
+        : `<div style="margin-top: 0.35rem; color: #94a3b8; font-style: italic;">No matching memories (Bank Isolated)</div>`;
+
+      col.innerHTML = `
+        <div style="font-weight: 700; color: var(--text-main);">${customerNames[cid] || cid}</div>
+        <div style="font-size: 0.72rem; color: #047857; font-weight: 600; margin-top: 0.15rem;">${info.memories_count} facts retrieved</div>
+        ${recalledItems}
+      `;
+      grid.appendChild(col);
+    }
+
+    if (verdictBox && verdictText) {
+      verdictBox.style.display = "block";
+      verdictText.innerText = data.security_verdict;
+    }
+
+  } catch (err) {
+    console.error("Isolation test error:", err);
+    grid.innerHTML = `<div style="grid-column: 1 / -1; color: #ef4444;">Error executing isolation test.</div>`;
+  }
+}
+
 // Startup
 document.addEventListener("DOMContentLoaded", () => {
   loadCustomers();
 });
+

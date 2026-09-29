@@ -1,11 +1,15 @@
 import logging
+from typing import List, Dict, Any
 from fastapi import APIRouter, HTTPException, status
 
 from backend.models import (
     CustomerMemoryResponse,
     MemorySearchRequest,
     MemoryStoreRequest,
-    MemoryItemDetail
+    MemoryItemDetail,
+    ReflectionResponse,
+    IsolationTestRequest,
+    IsolationTestResponse
 )
 from backend.services.hindsight_service import hindsight_service
 from backend.routes.customers import _load_customers_file
@@ -18,7 +22,7 @@ def get_customer_memory(customer_id: str):
     """
     Fetch comprehensive Hindsight memory overview for a customer:
     - Structured profile (OS, Stack, Issues, Preferences)
-    - Full list of memory units
+    - Full list of memory units categorized into Biomimetic 3-Tier Architecture
     - Chronological learning timeline
     """
     customers = _load_customers_file()
@@ -33,10 +37,39 @@ def get_customer_memory(customer_id: str):
         customer_name=customer["name"],
         total_memories=memory_data["total_memories"],
         memories=memory_data["memories"],
+        categorized_memories=memory_data.get("categorized_memories", {}),
         timeline=memory_data["timeline"],
         structured_profile=memory_data["structured_profile"],
         hindsight_connected=memory_data["hindsight_connected"]
     )
+
+@router.post("/customers/{customer_id}/reflect", response_model=ReflectionResponse)
+def trigger_hindsight_reflection(customer_id: str):
+    """
+    Hindsight Autonomous Reflection:
+    Synthesizes customer memories into high-level mental models,
+    recurring pattern recognition, and proactive resolution advice.
+    """
+    customers = _load_customers_file()
+    customer = next((c for c in customers if c["id"] == customer_id), None)
+    if not customer:
+        raise HTTPException(status_code=404, detail="Customer not found")
+
+    reflection_data = hindsight_service.reflect(customer_id)
+    return ReflectionResponse(**reflection_data)
+
+@router.post("/memory/isolation-test", response_model=IsolationTestResponse)
+def test_cross_tenant_isolation(payload: IsolationTestRequest):
+    """
+    Advanced Enterprise Security Proof:
+    Executes the same query across multiple customer banks to demonstrate
+    zero cross-tenant memory leakage.
+    """
+    result = hindsight_service.test_cross_bank_isolation(
+        query=payload.query,
+        customer_ids=payload.customer_ids
+    )
+    return IsolationTestResponse(**result)
 
 @router.post("/memory/search")
 def search_memories(payload: MemorySearchRequest):

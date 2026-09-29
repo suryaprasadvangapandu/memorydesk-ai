@@ -10,7 +10,7 @@
     "preference": "Prefers step-by-step troubleshooting and concise CLI snippets",
     "last_issue": "Django database connection timeout on port 5432",
     "last_solution": "Updated PostgreSQL service binding and restarted service",
-    "conversations_count": 10,
+    "conversations_count": 15,
     "last_interaction": "2026-09-28 16:45",
     "status": "Active",
     "seed_memories": [
@@ -63,6 +63,26 @@
       "Environment is Python 3.11, PyTorch 2.4 with CUDA 12.4.",
       "Prefers GPU VRAM metrics and strict requirements.txt pinning.",
       "Previously resolved CUDA Out of Memory by lowering batch size to 16 and using fp16."
+    ]
+  },
+  {
+    "id": "cust_68652a",
+    "name": "surya",
+    "email": "surya@example.com",
+    "company": "infosys",
+    "title": "Developer",
+    "os": "ubuntu",
+    "environment": "django,sql",
+    "preference": "shell",
+    "last_issue": null,
+    "last_solution": null,
+    "conversations_count": 4,
+    "last_interaction": "2026-09-29 19:53",
+    "status": "Active",
+    "seed_memories": [
+      "Customer is surya, Developer at infosys.",
+      "Operating system is ubuntu with development stack django,sql.",
+      "Support preference: shell."
     ]
   }
 ]

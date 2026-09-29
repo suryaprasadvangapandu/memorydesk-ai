@@ -6,7 +6,7 @@ from datetime import datetime
 from pathlib import Path
 
 from backend.config import DATA_DIR, SAMPLE_CUSTOMERS_PATH
-from backend.models import ChatRequest, ChatResponse, MemoryItemDetail, Customer
+from backend.models import ChatRequest, ChatResponse, MemoryItemDetail, Customer, AutoFixScript
 from backend.services.hindsight_service import hindsight_service
 from backend.services.llm_service import llm_service
 
@@ -39,42 +39,79 @@ class AgentService:
     def get_customer_conversations(self, customer_id: str) -> List[Dict[str, Any]]:
         return self._conversations_cache.get(customer_id, [])
 
+    def _generate_auto_fix_script(self, user_message: str, customer: Dict[str, Any]) -> Optional[AutoFixScript]:
+        """
+        Dynamically synthesizes a copy-pasteable script tailored to customer's exact OS.
+        """
+        msg_l = user_message.lower()
+        os_name = customer.get("os", "Windows 11")
+        is_windows = "windows" in os_name.lower()
+        is_mac = "mac" in os_name.lower()
+        is_linux = "ubuntu" in os_name.lower() or "linux" in os_name.lower()
+
+        # Database / Port issue
+        if any(w in msg_l for w in ["database", "postgres", "port", "5432", "django"]):
+            if is_windows:
+                return AutoFixScript(
+                    os=os_name,
+                    shell="powershell",
+                    code="# Verify and restart PostgreSQL on Windows 11\nGet-Service postgresql* | Select-Object Name, Status\nRestart-Service -Name postgresql-x64-16 -Force\nTest-NetConnection -ComputerName 127.0.0.1 -Port 5432\npython manage.py dbshell",
+                    explanation="Checks local Windows service status, restarts daemon, and verifies port 5432 connectivity."
+                )
+            elif is_mac:
+                return AutoFixScript(
+                    os=os_name,
+                    shell="zsh",
+                    code="# Restart PostgreSQL via Homebrew on macOS\nbrew services list | grep postgresql\nbrew services restart postgresql@16\nnc -zv 127.0.0.1 5432",
+                    explanation="Restarts Homebrew PostgreSQL daemon and tests loopback socket on macOS."
+                )
+            else:
+                return AutoFixScript(
+                    os=os_name,
+                    shell="bash",
+                    code="# Check and restart PostgreSQL systemd service on Ubuntu\nsudo systemctl status postgresql\nsudo systemctl restart postgresql\npg_isready -h 127.0.0.1 -p 5432",
+                    explanation="Restarts Linux systemd daemon and queries pg_isready health probe."
+                )
+
+        # Docker issue
+        if "docker" in msg_l or "socket" in msg_l:
+            return AutoFixScript(
+                os=os_name,
+                shell="bash" if not is_windows else "powershell",
+                code="sudo chmod 666 /var/run/docker.sock\ndocker ps" if not is_windows else "Restart-Service docker\ndocker ps",
+                explanation="Refreshes socket permissions for the container daemon."
+            )
+
+        # GPU / CUDA issue
+        if "cuda" in msg_l or "oom" in msg_l or "gpu" in msg_l:
+            return AutoFixScript(
+                os=os_name,
+                shell="bash",
+                code="export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True\nnvidia-smi --query-gpu=memory.total,memory.free --format=csv",
+                explanation="Sets PyTorch CUDA memory segmentation allocator to eliminate OOM spikes."
+            )
+
+        return None
+
     def _extract_new_memory_fact(self, user_message: str, customer: Dict[str, Any]) -> Optional[str]:
-        """
-        Analyzes the user's message to extract useful persistent facts for Hindsight storage.
-        E.g. operating system mentions, software tools, errors encountered, preferences.
-        """
         msg = user_message.strip()
         msg_lower = msg.lower()
 
-        # Check for environment disclosure
         if "windows" in msg_lower or "macos" in msg_lower or "ubuntu" in msg_lower or "linux" in msg_lower:
             return f"Customer reported operating environment: {msg}"
-        
-        # Check for python/node/stack version disclosure
         if any(tool in msg_lower for tool in ["python", "django", "node", "docker", "postgres", "pytorch", "fastapi"]):
             if "i use" in msg_lower or "i am using" in msg_lower or "running" in msg_lower or "version" in msg_lower:
                 return f"Customer environment stack specification: {msg}"
-
-        # Check for error disclosure
         if any(term in msg_lower for term in ["error", "exception", "failed", "timeout", "issue", "bug"]):
             return f"Customer troubleshooting incident: {msg}"
-
-        # Check for preferences
         if "prefer" in msg_lower or "like" in msg_lower or "please provide" in msg_lower or "step-by-step" in msg_lower:
             return f"Customer workflow preference: {msg}"
-
-        # Check for identity
         if "my name is" in msg_lower or "i am " in msg_lower:
             return f"Customer identification detail: {msg}"
 
         return None
 
     def process_chat(self, chat_request: ChatRequest, customer: Dict[str, Any]) -> ChatResponse:
-        """
-        Executes the end-to-end cognitive memory agent loop:
-        1. Query -> 2. Hindsight Recall -> 3. Context Construction -> 4. LLM Generation -> 5. Hindsight Retain -> 6. Response
-        """
         customer_id = chat_request.customer_id
         user_message = chat_request.message
         conv_id = chat_request.conversation_id or f"conv_{uuid.uuid4().hex[:8]}"
@@ -113,7 +150,6 @@ class AgentService:
                 memory_updated = True
                 stored_text = new_fact
         else:
-            # If the user shared an issue, retain a summary of interaction
             if any(term in user_message.lower() for term in ["database", "error", "problem", "happened"]):
                 summary_fact = f"Customer referenced recurring issue: '{user_message}' - agent provided targeted troubleshooting steps."
                 success, _ = hindsight_service.store_memory(
@@ -126,7 +162,10 @@ class AgentService:
                     memory_updated = True
                     stored_text = summary_fact
 
-        # Step 6: Record conversation turn
+        # Step 6: Generate Auto-Fix Script tailored to customer OS
+        auto_fix = self._generate_auto_fix_script(user_message, customer)
+
+        # Step 7: Record conversation turn
         now_iso = datetime.utcnow().isoformat()
         if customer_id not in self._conversations_cache:
             self._conversations_cache[customer_id] = []
@@ -146,7 +185,6 @@ class AgentService:
         })
         self._save_conversations()
 
-        # Determine Hindsight status for UI badge
         hindsight_status = "active_live" if hindsight_service.is_connected else "active_local"
         hindsight_msg = (
             f"Connected to official Hindsight server ({hindsight_service.base_url})"
@@ -164,8 +202,10 @@ class AgentService:
             new_memory_stored=stored_text,
             hindsight_status=hindsight_status,
             hindsight_message=hindsight_msg,
-            llm_provider=llm_service.provider_name
+            llm_provider=llm_service.provider_name,
+            auto_fix_script=auto_fix
         )
+
 
 # Global singleton
 agent_service = AgentService()

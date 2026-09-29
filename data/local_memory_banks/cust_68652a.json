@@ -1,0 +1,86 @@
+[
+  {
+    "id": "mem_ecf982c041",
+    "text": "Customer is surya, Developer at infosys.",
+    "type": "fact",
+    "created_at": "2026-09-29T14:23:12.213332",
+    "metadata": {
+      "source": "seed_profile",
+      "type": "fact"
+    },
+    "tags": [
+      "seed",
+      "profile"
+    ]
+  },
+  {
+    "id": "mem_1fef3faf15",
+    "text": "Operating system is ubuntu with development stack django,sql.",
+    "type": "fact",
+    "created_at": "2026-09-29T14:23:12.214971",
+    "metadata": {
+      "source": "seed_profile",
+      "type": "fact"
+    },
+    "tags": [
+      "seed",
+      "profile"
+    ]
+  },
+  {
+    "id": "mem_66f57a84a0",
+    "text": "Support preference: shell.",
+    "type": "fact",
+    "created_at": "2026-09-29T14:23:12.216773",
+    "metadata": {
+      "source": "seed_profile",
+      "type": "fact"
+    },
+    "tags": [
+      "seed",
+      "profile"
+    ]
+  },
+  {
+    "id": "mem_7bfe42a1b2",
+    "text": "Customer reported operating environment: My name is Rahul. I use Windows 11 and Python 3.12. I am getting a Django database connection error.",
+    "type": "learned_fact",
+    "created_at": "2026-09-29T14:23:41.919488",
+    "metadata": {
+      "source": "conversation",
+      "type": "learned_fact"
+    },
+    "tags": [
+      "learned",
+      "conversation"
+    ]
+  },
+  {
+    "id": "mem_b53748e392",
+    "text": "Customer referenced recurring issue: 'The same database problem happened again.' - agent provided targeted troubleshooting steps.",
+    "type": "experience",
+    "created_at": "2026-09-29T14:23:52.879886",
+    "metadata": {
+      "source": "conversation_resolution",
+      "type": "experience"
+    },
+    "tags": [
+      "experience",
+      "troubleshooting"
+    ]
+  },
+  {
+    "id": "mem_0f83f4c8a7",
+    "text": "Customer workflow preference: What environment and preferences do you remember about me?",
+    "type": "learned_fact",
+    "created_at": "2026-09-29T14:24:04.389053",
+    "metadata": {
+      "source": "conversation",
+      "type": "learned_fact"
+    },
+    "tags": [
+      "learned",
+      "conversation"
+    ]
+  }
+]

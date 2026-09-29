@@ -30,11 +30,17 @@ class CustomerCreate(BaseModel):
 class MemoryItemDetail(BaseModel):
     id: str
     text: str
-    type: str = "fact"
+    type: str = "fact"  # "world_fact" | "experience" | "observation"
     created_at: str = Field(default_factory=lambda: datetime.utcnow().isoformat())
     relevance_score: Optional[float] = None
     metadata: Optional[Dict[str, Any]] = None
     tags: Optional[List[str]] = None
+
+class AutoFixScript(BaseModel):
+    os: str
+    shell: str  # "powershell" | "zsh" | "bash"
+    code: str
+    explanation: str
 
 class ChatRequest(BaseModel):
     customer_id: str
@@ -52,6 +58,7 @@ class ChatResponse(BaseModel):
     hindsight_status: str  # "active" | "connected" | "local_embedded"
     hindsight_message: Optional[str] = None
     llm_provider: str
+    auto_fix_script: Optional[AutoFixScript] = None
     timestamp: str = Field(default_factory=lambda: datetime.utcnow().isoformat())
 
 class MemorySearchRequest(BaseModel):
@@ -70,14 +77,35 @@ class CustomerMemoryResponse(BaseModel):
     customer_name: str
     total_memories: int
     memories: List[MemoryItemDetail]
+    categorized_memories: Dict[str, List[MemoryItemDetail]] = Field(default_factory=dict)
     timeline: List[Dict[str, Any]]
     structured_profile: Dict[str, Any]
     hindsight_connected: bool
 
+class ReflectionResponse(BaseModel):
+    customer_id: str
+    customer_name: str
+    mental_model: str
+    recurring_pattern: str
+    disposition_score: float  # 0.0 - 1.0
+    proactive_recommendation: str
+    facts_analyzed: int
+    generated_at: str = Field(default_factory=lambda: datetime.utcnow().isoformat())
+
+class IsolationTestRequest(BaseModel):
+    query: str = "database connection issue"
+    customer_ids: List[str] = Field(default_factory=lambda: ["cust_rahul", "cust_priya", "cust_arjun"])
+
+class IsolationTestResponse(BaseModel):
+    query: str
+    results_by_customer: Dict[str, Any]
+    isolation_confirmed: bool
+    security_verdict: str
+
 class ConversationItem(BaseModel):
     id: str
     customer_id: str
-    role: str  # "user" | "assistant"
+    role: str
     message: str
     timestamp: str
     memories_used: Optional[int] = 0

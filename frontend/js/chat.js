@@ -62,6 +62,30 @@ function appendMessage(role, text, metadata = {}) {
     wrapper.appendChild(updateBar);
   }
 
+  // If OS-Specific AutoFix Script was generated
+  if (role === "assistant" && metadata.auto_fix_script) {
+    const fix = metadata.auto_fix_script;
+    const fixCard = document.createElement("div");
+    fixCard.className = "autofix-card";
+    const encoded = encodeURIComponent(fix.code);
+    fixCard.innerHTML = `
+      <div class="autofix-header">
+        <span>⚡ OS-Adaptive Fix (${fix.os})</span>
+        <div style="display: flex; gap: 0.4rem; align-items: center;">
+          <span class="autofix-shell-badge">${fix.shell}</span>
+          <button class="copy-btn" onclick="navigator.clipboard.writeText(decodeURIComponent('${encoded}')); showToast('Copied command to clipboard!', 'success');">
+            📋 Copy
+          </button>
+        </div>
+      </div>
+      <div class="autofix-code">${fix.code}</div>
+      <div style="padding: 0.4rem 0.85rem; font-size: 0.72rem; color: #94a3b8; background: #131d31; border-top: 1px solid #1e293b;">
+        ${fix.explanation}
+      </div>
+    `;
+    wrapper.appendChild(fixCard);
+  }
+
   row.appendChild(avatar);
   row.appendChild(wrapper);
   container.appendChild(row);
@@ -132,13 +156,15 @@ async function sendChatMessage(messageText) {
 
     const data = await res.json();
     
-    // Append assistant bubble with Hindsight metadata
+    // Append assistant bubble with Hindsight metadata & AutoFix script
     appendMessage("assistant", data.response, {
       memories_used: data.memories_used,
       retrieved_memories: data.retrieved_memories,
       memory_updated: data.memory_updated,
-      new_memory_stored: data.new_memory_stored
+      new_memory_stored: data.new_memory_stored,
+      auto_fix_script: data.auto_fix_script
     });
+
 
     // Update memory indicator notification on right panel
     const retrievalBox = document.getElementById("retrieval-status-box");
