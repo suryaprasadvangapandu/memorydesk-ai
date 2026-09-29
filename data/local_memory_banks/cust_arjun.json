@@ -1,0 +1,72 @@
+[
+  {
+    "id": "mem_bb38519582",
+    "text": "Customer is Arjun Kumar, ML Engineer at AI Pulse Labs.",
+    "type": "fact",
+    "created_at": "2026-09-29T14:04:22.107723",
+    "metadata": {
+      "source": "seed_profile",
+      "type": "fact"
+    },
+    "tags": [
+      "seed",
+      "profile"
+    ]
+  },
+  {
+    "id": "mem_43fab25662",
+    "text": "Operating system is Ubuntu 22.04 LTS with NVIDIA RTX 4090 (24GB VRAM).",
+    "type": "fact",
+    "created_at": "2026-09-29T14:04:24.390680",
+    "metadata": {
+      "source": "seed_profile",
+      "type": "fact"
+    },
+    "tags": [
+      "seed",
+      "profile"
+    ]
+  },
+  {
+    "id": "mem_2aa5050642",
+    "text": "Environment is Python 3.11, PyTorch 2.4 with CUDA 12.4.",
+    "type": "fact",
+    "created_at": "2026-09-29T14:04:26.669294",
+    "metadata": {
+      "source": "seed_profile",
+      "type": "fact"
+    },
+    "tags": [
+      "seed",
+      "profile"
+    ]
+  },
+  {
+    "id": "mem_181e78f5b1",
+    "text": "Prefers GPU VRAM metrics and strict requirements.txt pinning.",
+    "type": "fact",
+    "created_at": "2026-09-29T14:04:28.950398",
+    "metadata": {
+      "source": "seed_profile",
+      "type": "fact"
+    },
+    "tags": [
+      "seed",
+      "profile"
+    ]
+  },
+  {
+    "id": "mem_6e6ba43c11",
+    "text": "Previously resolved CUDA Out of Memory by lowering batch size to 16 and using fp16.",
+    "type": "fact",
+    "created_at": "2026-09-29T14:04:31.248767",
+    "metadata": {
+      "source": "seed_profile",
+      "type": "fact"
+    },
+    "tags": [
+      "seed",
+      "profile"
+    ]
+  }
+]

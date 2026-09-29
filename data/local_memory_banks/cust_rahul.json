@@ -1,0 +1,128 @@
+[
+  {
+    "id": "mem_901f3c196f",
+    "text": "Customer is Rahul Sharma, Full Stack Lead at FinScale Technologies.",
+    "type": "fact",
+    "created_at": "2026-09-29T14:03:59.161158",
+    "metadata": {
+      "source": "seed_profile",
+      "type": "fact"
+    },
+    "tags": [
+      "seed",
+      "profile"
+    ]
+  },
+  {
+    "id": "mem_76aee68bfb",
+    "text": "Operating system is Windows 11 Pro with Python 3.12, Django 5.0, and PostgreSQL 16.",
+    "type": "fact",
+    "created_at": "2026-09-29T14:04:01.529354",
+    "metadata": {
+      "source": "seed_profile",
+      "type": "fact"
+    },
+    "tags": [
+      "seed",
+      "profile"
+    ]
+  },
+  {
+    "id": "mem_063f06d225",
+    "text": "Prefers step-by-step troubleshooting instructions and concise code snippets rather than generic documentation.",
+    "type": "fact",
+    "created_at": "2026-09-29T14:04:03.821416",
+    "metadata": {
+      "source": "seed_profile",
+      "type": "fact"
+    },
+    "tags": [
+      "seed",
+      "profile"
+    ]
+  },
+  {
+    "id": "mem_165ef49bb7",
+    "text": "Previously resolved a Django database connection error caused by local PostgreSQL port 5432 configuration.",
+    "type": "fact",
+    "created_at": "2026-09-29T14:04:06.105286",
+    "metadata": {
+      "source": "seed_profile",
+      "type": "fact"
+    },
+    "tags": [
+      "seed",
+      "profile"
+    ]
+  },
+  {
+    "id": "mem_fc05a6fccd",
+    "text": "Prefers verifying database connectivity using python manage.py dbshell.",
+    "type": "fact",
+    "created_at": "2026-09-29T14:04:08.402226",
+    "metadata": {
+      "source": "seed_profile",
+      "type": "fact"
+    },
+    "tags": [
+      "seed",
+      "profile"
+    ]
+  },
+  {
+    "id": "mem_ef4104886a",
+    "text": "Customer reported operating environment: My name is Rahul. I use Windows 11 and Python 3.12. I am getting a Django database connection error.",
+    "type": "learned_fact",
+    "created_at": "2026-09-29T14:05:17.525995",
+    "metadata": {
+      "source": "conversation",
+      "type": "learned_fact"
+    },
+    "tags": [
+      "learned",
+      "conversation"
+    ]
+  },
+  {
+    "id": "mem_bc1e4af1aa",
+    "text": "Customer referenced recurring issue: 'The same database problem happened again.' - agent provided targeted troubleshooting steps.",
+    "type": "experience",
+    "created_at": "2026-09-29T14:05:17.541279",
+    "metadata": {
+      "source": "conversation_resolution",
+      "type": "experience"
+    },
+    "tags": [
+      "experience",
+      "troubleshooting"
+    ]
+  },
+  {
+    "id": "mem_1782a9702e",
+    "text": "Customer reported operating environment: My name is Rahul and I use Windows 11 with Python 3.12.",
+    "type": "learned_fact",
+    "created_at": "2026-09-29T14:07:41.543554",
+    "metadata": {
+      "source": "conversation",
+      "type": "learned_fact"
+    },
+    "tags": [
+      "learned",
+      "conversation"
+    ]
+  },
+  {
+    "id": "mem_268bc83453",
+    "text": "Customer identification detail: I am having the same Django database problem as before.",
+    "type": "learned_fact",
+    "created_at": "2026-09-29T14:07:41.581340",
+    "metadata": {
+      "source": "conversation",
+      "type": "learned_fact"
+    },
+    "tags": [
+      "learned",
+      "conversation"
+    ]
+  }
+]

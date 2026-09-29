@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MemoryDesk AI — Customer Support That Never Forgets</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="landing-nav">
+    <a href="/" class="logo-container">
+      <div class="logo-badge">M</div>
+      <div class="logo-text">MemoryDesk <span>AI</span></div>
+    </a>
+    <div class="nav-links">
+      <a href="#problem" class="nav-link">Problem</a>
+      <a href="#how-it-works" class="nav-link">How Memory Works</a>
+      <a href="#before-after" class="nav-link">Before vs After</a>
+      <a href="#technology" class="nav-link">Technology</a>
+      <a href="/dashboard.html" class="btn btn-primary">Try MemoryDesk</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-tag">
+      <span class="pulse-dot"></span>
+      HackwithHyderabad 3.0 &bull; Powered by Hindsight
+    </div>
+    <h1 class="hero-title">
+      Customer Support That <span>Never Forgets</span>
+    </h1>
+    <p class="hero-subtitle">
+      Traditional support bots suffer from amnesia. MemoryDesk AI integrates <strong>Hindsight persistent memory</strong> so your agent learns software stacks, recurring bugs, and preferences across every session.
+    </p>
+    <div class="hero-buttons">
+      <a href="/dashboard.html" class="btn btn-primary" style="padding: 0.85rem 1.75rem; font-size: 1.05rem;">
+        Launch MemoryDesk Dashboard &rarr;
+      </a>
+      <a href="#before-after" class="btn btn-secondary" style="padding: 0.85rem 1.75rem; font-size: 1.05rem;">
+        See Memory Demo
+      </a>
+    </div>
+
+    <!-- Live Comparison Preview Box -->
+    <div class="preview-card" id="before-after">
+      <div class="preview-header">
+        <div class="preview-controls">
+          <span class="ctrl-dot red"></span>
+          <span class="ctrl-dot yellow"></span>
+          <span class="ctrl-dot green"></span>
+        </div>
+        <div class="preview-title">Real-World Case Study: Recurring Database Error</div>
+        <div>
+          <span style="font-size: 0.75rem; font-weight: 700; color: #10b981; background: #ecfdf5; padding: 0.2rem 0.6rem; border-radius: 999px;">
+            ● HINDSIGHT ACTIVE
+          </span>
+        </div>
+      </div>
+      <div class="preview-body">
+        
+        <!-- Without Memory Box -->
+        <div class="comparison-box without-memory">
+          <span class="comparison-tag">Without Memory (Standard Chatbot)</span>
+          <div class="dialogue-turn">
+            <div class="turn-role" style="color: #991b1b;">Customer:</div>
+            <div class="turn-text">"I have the same database connection problem again."</div>
+          </div>
+          <div class="dialogue-turn">
+            <div class="turn-role" style="color: #991b1b;">Bot (Amnesic):</div>
+            <div class="turn-text" style="color: #64748b;">
+              "Could you please tell me what operating system you are using, what database you run, and what error code you got previously?"
+            </div>
+          </div>
+          <p style="font-size: 0.78rem; color: #dc2626; margin-top: 0.75rem;">
+            &cross; Frustrating: Customer forced to repeat their OS, Python version, and config for the 4th time.
+          </p>
+        </div>
+
+        <!-- With Hindsight Memory Box -->
+        <div class="comparison-box with-memory">
+          <span class="comparison-tag">With Hindsight Memory (MemoryDesk AI)</span>
+          <div class="dialogue-turn">
+            <div class="turn-role" style="color: #166534;">Customer:</div>
+            <div class="turn-text">"The same database problem happened again."</div>
+          </div>
+          <div class="dialogue-turn">
+            <div class="turn-role" style="color: #166534;">MemoryDesk Agent:</div>
+            <div class="turn-text" style="border-left: 3px solid #10b981;">
+              "Hello Rahul! I remember you are on Windows 11 with Python 3.12 and Django 5.0, and previously resolved a PostgreSQL port 5432 connection issue. Let's verify if the PostgreSQL service restarted or if your network adapter reset."
+            </div>
+          </div>
+          <p style="font-size: 0.78rem; color: #15803d; margin-top: 0.75rem;">
+            &check; Delightful: 0 wasted customer time. Context instantly retrieved from Hindsight.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem & Solution Section -->
+  <section class="features-section" id="problem">
+    <div class="section-header">
+      <h2 class="section-title">Why Customer Support AI Is Broken</h2>
+      <p class="section-subtitle">Stateless LLMs forget everything the second a browser tab closes.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon" style="background: #fef2f2; color: #ef4444;">🔄</div>
+        <h3 class="feature-title">Repetitive Explanation Fatigue</h3>
+        <p class="feature-desc">
+          Customers spend 30-40% of support conversations repeating who they are, their environment, their OS, and what troubleshooting steps already failed.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background: #fffbeb; color: #f59e0b;">🧩</div>
+        <h3 class="feature-title">Naive RAG Isn't Agentic Memory</h3>
+        <p class="feature-desc">
+          Standard vector databases dump conversation dumps into flat vectors. They can't distinguish between transient chatter and core customer facts.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background: #ecfdf5; color: #10b981;">💡</div>
+        <h3 class="feature-title">The Hindsight Solution</h3>
+        <p class="feature-desc">
+          Hindsight's biomimetic memory isolates banks, extracts structured facts (World facts, Experiences, Observations), and scores relevance across semantic, temporal, and keyword graphs.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How Memory Works Section -->
+  <section class="features-section" id="how-it-works" style="margin-top: 2rem;">
+    <div class="section-header">
+      <h2 class="section-title">The Hindsight Cognitive Memory Cycle</h2>
+      <p class="section-subtitle">How MemoryDesk AI turns every message into compound intelligence</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📥</div>
+        <h3 class="feature-title">1. Retain (Structured Storage)</h3>
+        <p class="feature-desc">
+          When a customer shares technical details, Hindsight extracts facts, entities, and environment constraints into an isolated customer memory bank.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <h3 class="feature-title">2. Recall (Multi-Strategy Retrieval)</h3>
+        <p class="feature-desc">
+          Upon receiving a query, Hindsight runs semantic similarity, keyword matching, and temporal ranking to surface the exact relevant facts into the prompt.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧠</div>
+        <h3 class="feature-title">3. Reflect (Agent Adaptation)</h3>
+        <p class="feature-desc">
+          The agent crafts a hyper-personalized response tailored to the customer's known preferences (e.g. step-by-step guidance) and software stack.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Architecture Section -->
+  <section class="architecture-section" id="technology">
+    <div class="architecture-inner">
+      <div class="section-header">
+        <h2 class="section-title" style="color: white;">Production Architecture</h2>
+        <p class="section-subtitle" style="color: #94a3b8;">Clean separation of concerns with official Hindsight SDK</p>
+      </div>
+      
+      <div class="arch-flow-diagram">
+        <div class="flow-step">
+          <div class="flow-step-icon">💻</div>
+          <div class="flow-step-title">Frontend UI</div>
+          <div class="flow-step-desc">Vanilla JS &bull; SaaS Dashboard &bull; Fetch API</div>
+        </div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-step">
+          <div class="flow-step-icon">⚡</div>
+          <div class="flow-step-title">FastAPI Backend</div>
+          <div class="flow-step-desc">Async REST &bull; Pydantic Models &bull; Validation</div>
+        </div>
+        <div class="flow-arrow">&harr;</div>
+        <div class="flow-step" style="border-color: #38bdf8; background: rgba(56, 189, 248, 0.15);">
+          <div class="flow-step-icon">🧠</div>
+          <div class="flow-step-title" style="color: #7dd3fc;">Hindsight SDK</div>
+          <div class="flow-step-desc">Vectorize.io &bull; Retain &bull; Recall &bull; Banks</div>
+        </div>
+        <div class="flow-arrow">&harr;</div>
+        <div class="flow-step">
+          <div class="flow-step-icon">🤖</div>
+          <div class="flow-step-title">LLM Service</div>
+          <div class="flow-step-desc">Groq &bull; Llama 3.3 70B &bull; Memory Context</div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 3.5rem;">
+        <a href="/dashboard.html" class="btn btn-primary" style="padding: 0.9rem 2rem; font-size: 1.1rem;">
+          Open Live Hackathon Dashboard &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background: #090d16; color: #64748b; padding: 2.5rem 1.5rem; text-align: center; font-size: 0.85rem; border-top: 1px solid #1e293b;">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <strong>MemoryDesk AI</strong> &bull; Built for HackwithHyderabad 3.0 &bull; Persistent Memory by Hindsight
+      </div>
+      <div>
+        <a href="/dashboard.html" style="color: #94a3b8; text-decoration: none; margin-left: 1rem;">Dashboard</a>
+        <a href="https://github.com/vectorize-io/hindsight" target="_blank" style="color: #94a3b8; text-decoration: none; margin-left: 1rem;">Hindsight Docs</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

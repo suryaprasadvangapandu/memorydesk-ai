@@ -1,0 +1,72 @@
+[
+  {
+    "id": "mem_89ee94da40",
+    "text": "Customer is Priya Reddy, DevOps Engineer at CloudNative Systems.",
+    "type": "fact",
+    "created_at": "2026-09-29T14:04:10.673738",
+    "metadata": {
+      "source": "seed_profile",
+      "type": "fact"
+    },
+    "tags": [
+      "seed",
+      "profile"
+    ]
+  },
+  {
+    "id": "mem_b1338485b7",
+    "text": "Operating system is macOS Sonoma running on Apple Silicon M3 Max.",
+    "type": "fact",
+    "created_at": "2026-09-29T14:04:12.971306",
+    "metadata": {
+      "source": "seed_profile",
+      "type": "fact"
+    },
+    "tags": [
+      "seed",
+      "profile"
+    ]
+  },
+  {
+    "id": "mem_4113ab5f64",
+    "text": "Stack is Node.js 20, Docker Desktop 4.30, and Minikube.",
+    "type": "fact",
+    "created_at": "2026-09-29T14:04:15.255129",
+    "metadata": {
+      "source": "seed_profile",
+      "type": "fact"
+    },
+    "tags": [
+      "seed",
+      "profile"
+    ]
+  },
+  {
+    "id": "mem_2b7c8c5952",
+    "text": "Prefers direct CLI one-liners with explanation of flags.",
+    "type": "fact",
+    "created_at": "2026-09-29T14:04:17.522035",
+    "metadata": {
+      "source": "seed_profile",
+      "type": "fact"
+    },
+    "tags": [
+      "seed",
+      "profile"
+    ]
+  },
+  {
+    "id": "mem_a32e09156c",
+    "text": "Previously resolved Docker socket permission denied at /var/run/docker.sock.",
+    "type": "fact",
+    "created_at": "2026-09-29T14:04:19.823706",
+    "metadata": {
+      "source": "seed_profile",
+      "type": "fact"
+    },
+    "tags": [
+      "seed",
+      "profile"
+    ]
+  }
+]
