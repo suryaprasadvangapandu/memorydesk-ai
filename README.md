@@ -7,7 +7,11 @@
 [![Python](https://img.shields.io/badge/Python-3.11%20%7C%203.12%20%7C%203.13-blue.svg?logo=python&logoColor=white)](https://python.org)
 [![Hindsight](https://img.shields.io/badge/Memory-Hindsight%200.10.2-6366f1.svg)](https://github.com/vectorize-io/hindsight)
 [![Groq](https://img.shields.io/badge/LLM-Groq%20Llama%203.3%2070B-f55036.svg)](https://groq.com)
+[![LinkedIn Article](https://img.shields.io/badge/LinkedIn-Read%20Article-0077b5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/pulse/why-giving-ai-agents-1m-context-window-wrong-way-solve-vangapandu-nmlsf)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+> 📖 **Published Technical Article:** [Why Giving AI Agents a 1M Context Window Is the Wrong Way to Solve Memory](https://www.linkedin.com/pulse/why-giving-ai-agents-1m-context-window-wrong-way-solve-vangapandu-nmlsf)
+
 
 ---
 

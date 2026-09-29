@@ -9,7 +9,11 @@
 ## Repository URL
 `https://github.com/suryaprasadvangapandu/memorydesk-ai`
 
+## Published Technical Article (LinkedIn)
+[Why Giving AI Agents a 1M Context Window Is the Wrong Way to Solve Memory](https://www.linkedin.com/pulse/why-giving-ai-agents-1m-context-window-wrong-way-solve-vangapandu-nmlsf)
+
 ---
+
 
 ## 🧠 Question: How is Hindsight Memory Used in Your Solution?
 
