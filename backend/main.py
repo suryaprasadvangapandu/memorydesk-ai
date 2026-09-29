@@ -1,4 +1,12 @@
+import sys
 import logging
+from pathlib import Path
+
+# Ensure project root is in sys.path when executed directly as a script
+ROOT_DIR = Path(__file__).resolve().parent.parent
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -15,6 +23,8 @@ from backend.routes.memory import router as memory_router
 from backend.services.hindsight_service import hindsight_service
 from backend.services.llm_service import llm_service
 
+from contextlib import asynccontextmanager
+
 # Logging setup
 logging.basicConfig(
     level=logging.INFO,
@@ -22,10 +32,23 @@ logging.basicConfig(
 )
 logger = logging.getLogger("memorydesk.main")
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    logger.info("Initializing MemoryDesk AI Application...")
+    init_customers()
+    connected, version = hindsight_service.check_connection()
+    if connected:
+        logger.info(f"Hindsight Memory Server Connected! (Version: {version})")
+    else:
+        logger.info(f"Hindsight Server at {HINDSIGHT_URL} unreachable ({version}). Running on High-Availability Local Hindsight Persistence Bank.")
+    yield
+    hindsight_service.close()
+
 app = FastAPI(
     title="MemoryDesk AI",
     description="Customer Support That Never Forgets — Powered by Hindsight Persistent Memory",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan
 )
 
 # Enable CORS for development
@@ -41,18 +64,6 @@ app.add_middleware(
 app.include_router(customers_router)
 app.include_router(chat_router)
 app.include_router(memory_router)
-
-@app.on_event("startup")
-async def on_startup():
-    logger.info("Initializing MemoryDesk AI Application...")
-    # Initialize customer memories
-    init_customers()
-    # Check Hindsight server connectivity
-    connected, version = hindsight_service.check_connection()
-    if connected:
-        logger.info(f"Hindsight Memory Server Connected! (Version: {version})")
-    else:
-        logger.info(f"Hindsight Server at {HINDSIGHT_URL} unreachable ({version}). Running on High-Availability Local Hindsight Persistence Bank.")
 
 @app.get("/api/health", response_model=HealthResponse, tags=["health"])
 def health_check():
@@ -86,4 +97,4 @@ if FRONTEND_DIR.exists():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("backend.main:app", host=HOST, port=PORT, reload=DEBUG)
+    uvicorn.run(app, host=HOST, port=PORT)
